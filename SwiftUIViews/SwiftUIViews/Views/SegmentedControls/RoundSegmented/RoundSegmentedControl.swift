@@ -9,9 +9,10 @@ import SwiftUI
 
 struct RoundSegmentedControl: View {
     private enum Constants {
-        static let height: CGFloat = 45
+        static let height: CGFloat = 57
         static let cornerRadius: CGFloat = 30
         static let horizontalPadding: CGFloat = 20
+        static let focusRoundedRectanglePadding: CGFloat = 5
     }
     
     var items: [RoundItem]
@@ -27,6 +28,7 @@ struct RoundSegmentedControl: View {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: Constants.cornerRadius)
                         .fill(.yellow)
+                        .padding(Constants.focusRoundedRectanglePadding)
                         .frame(width: tabWidth)
                         .offset(x: tabWidth * CGFloat(selectedIndex), y: 0)
                         .animation(.interactiveSpring(duration: 0.3), value: selectedIndex)
