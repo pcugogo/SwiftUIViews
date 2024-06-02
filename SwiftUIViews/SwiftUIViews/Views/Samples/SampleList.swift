@@ -16,9 +16,11 @@ struct SampleList: View {
             Section(title) {
                 ForEach(list, id: \.self) { text in
                     Text(text)
+                        .listRowSeparator(.hidden)
                 }
             }   
         }
+        .listStyle(.plain)
     }
 }
 
