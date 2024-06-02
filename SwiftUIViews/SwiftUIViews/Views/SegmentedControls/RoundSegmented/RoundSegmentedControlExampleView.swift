@@ -24,7 +24,7 @@ struct RoundSegmentedControlExampleView<Page: View>: View {
     
     private let viewControllers = PageType
         .allCases
-        .map { UIHostingController(rootView: SampleList(title: $0.rawValue)) }
+        .map { SampleList(title: $0.rawValue) }
     
     var body: some View {
         VStack {
@@ -34,7 +34,7 @@ struct RoundSegmentedControlExampleView<Page: View>: View {
             )
             
             PageView(
-                viewControllers: viewControllers,
+                pages: viewControllers,
                 currentPage: $pageViewModel.currentPage
             )
         }

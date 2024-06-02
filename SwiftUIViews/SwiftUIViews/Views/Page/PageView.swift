@@ -8,8 +8,8 @@
 import SwiftUI
 import UIKit
 
-struct PageView: UIViewControllerRepresentable {
-    var viewControllers: [UIViewController]
+struct PageView<Page: View>: UIViewControllerRepresentable {
+    var pages: [Page]
     @Binding var currentPage: Int
 
     func makeCoordinator() -> Coordinator {
@@ -31,20 +31,26 @@ struct PageView: UIViewControllerRepresentable {
         _ pageViewController: UIPageViewController,
         context: Context
     ) {
-        guard 
+        let viewControllers = context.coordinator.viewControllers
+        
+        guard
             let nextViewController = viewControllers[safe: currentPage],
             pageViewController.currentViewController != nextViewController
         else { return }
         
         pageViewController.setViewControllers(
             [nextViewController],
-            direction: pageNavigationDirection(pageViewController),
+            direction: pageNavigationDirection(
+                pageViewController,
+                viewControllers: viewControllers
+            ),
             animated: true
         )
     }
     
     private func pageNavigationDirection(
-        _ pageViewController: UIPageViewController
+        _ pageViewController: UIPageViewController,
+        viewControllers: [UIViewController]
     ) -> UIPageViewController.NavigationDirection {
         var direction: UIPageViewController.NavigationDirection = .forward
         
@@ -58,32 +64,34 @@ struct PageView: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-        var parent: PageView
-
+        let parent: PageView
+        var viewControllers: [UIViewController] = []
+        
         init(_ pageViewController: PageView) {
             parent = pageViewController
+            viewControllers = parent.pages.map { UIHostingController(rootView: $0) }
         }
 
         func pageViewController(
             _ pageViewController: UIPageViewController,
             viewControllerBefore viewController: UIViewController
         ) -> UIViewController? {
-            guard let index = parent.viewControllers.firstIndex(of: viewController)
+            guard let index = viewControllers.firstIndex(of: viewController)
             else { return nil }
             let previousIndex = index - 1
-            return previousIndex < 0 ? nil : parent.viewControllers[previousIndex]
+            return previousIndex < 0 ? nil : viewControllers[previousIndex]
         }
 
         func pageViewController(
             _ pageViewController: UIPageViewController,
             viewControllerAfter viewController: UIViewController
         ) -> UIViewController? {
-            guard let index = parent.viewControllers.firstIndex(of: viewController)
+            guard let index = viewControllers.firstIndex(of: viewController)
             else { return nil }
             let nextIndex = index + 1
-            return nextIndex == parent.viewControllers.count
+            return nextIndex == viewControllers.count
             ? nil
-            : parent.viewControllers[nextIndex]
+            : viewControllers[safe: nextIndex]
         }
 
         func pageViewController(
@@ -95,7 +103,7 @@ struct PageView: UIViewControllerRepresentable {
             guard
                 completed,
                 let viewController = pageViewController.viewControllers?.first,
-                let index = parent.viewControllers.firstIndex(of: viewController)
+                let index = viewControllers.firstIndex(of: viewController)
             else { return }
             parent.currentPage = index
         }
@@ -103,11 +111,10 @@ struct PageView: UIViewControllerRepresentable {
 }
 
 #Preview {
-    let viewControllers = [SampleList(title: "first"), SampleList(title: "second")]
-        .map { UIHostingController(rootView: $0) }
+    let pages = [SampleList(title: "first"), SampleList(title: "second")]
     @State var currentPage = 0
     
-    return PageView(viewControllers: viewControllers, currentPage: $currentPage)
+    return PageView(pages: pages, currentPage: $currentPage)
 }
 
 private extension UIPageViewController {
