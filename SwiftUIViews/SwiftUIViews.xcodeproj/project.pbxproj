@@ -17,6 +17,7 @@
 		CA6C7D062BF50FA00064D0AD /* RoundSegmentedControlExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6C7D052BF50FA00064D0AD /* RoundSegmentedControlExampleView.swift */; };
 		CA6C7D0B2BF5114A0064D0AD /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6C7D0A2BF5114A0064D0AD /* PageView.swift */; };
 		CA6C7D0E2BF513710064D0AD /* SampleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6C7D0D2BF513710064D0AD /* SampleList.swift */; };
+		CA7CA25D2D203ECB001A8DC0 /* OffsetControlScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7CA25C2D203EC8001A8DC0 /* OffsetControlScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		CA6C7D052BF50FA00064D0AD /* RoundSegmentedControlExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSegmentedControlExampleView.swift; sourceTree = "<group>"; };
 		CA6C7D0A2BF5114A0064D0AD /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		CA6C7D0D2BF513710064D0AD /* SampleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleList.swift; sourceTree = "<group>"; };
+		CA7CA25C2D203EC8001A8DC0 /* OffsetControlScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetControlScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,10 +85,9 @@
 		CA6C7CFB2BF50DF70064D0AD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CA7CA25A2D203E9E001A8DC0 /* Components */,
 				CA6C7D0C2BF513640064D0AD /* Samples */,
 				CA6C7D092BF511130064D0AD /* Content */,
-				CA6C7D082BF5110D0064D0AD /* Page */,
-				CA6C7D042BF50F770064D0AD /* SegmentedControls */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,14 +126,6 @@
 			path = RoundSegmented;
 			sourceTree = "<group>";
 		};
-		CA6C7D082BF5110D0064D0AD /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				CA6C7D0A2BF5114A0064D0AD /* PageView.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
 		CA6C7D092BF511130064D0AD /* Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +140,16 @@
 				CA6C7D0D2BF513710064D0AD /* SampleList.swift */,
 			);
 			path = Samples;
+			sourceTree = "<group>";
+		};
+		CA7CA25A2D203E9E001A8DC0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CA7CA25C2D203EC8001A8DC0 /* OffsetControlScrollView.swift */,
+				CA6C7D0A2BF5114A0064D0AD /* PageView.swift */,
+				CA6C7D042BF50F770064D0AD /* SegmentedControls */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA6C7CF02BF50DEF0064D0AD /* ContentView.swift in Sources */,
+				CA7CA25D2D203ECB001A8DC0 /* OffsetControlScrollView.swift in Sources */,
 				CA6C7D0E2BF513710064D0AD /* SampleList.swift in Sources */,
 				CA6C7D022BF50E600064D0AD /* RoundSegmentedControl.swift in Sources */,
 				CA6C7CFE2BF50E170064D0AD /* Array+.swift in Sources */,
